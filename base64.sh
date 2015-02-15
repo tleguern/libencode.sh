@@ -47,13 +47,11 @@ b64_encode() {
 			fi
 			_v="$_v$_b"
 		done
-		if [ $(echo -n $_v | wc -c) -eq 8 ]; then
-			_v="$(rightpad $_v 16)"
-			_pad=2
-		elif [ $(echo -n $_v | wc -c) -eq 16 ]; then
-			_v="$(rightpad $_v 8)"
-			_pad=1
-		fi
+		local _len="$(echo -n $_v | wc -c | tr -d ' ')"
+		case $_len in
+			8) _v="$(rightpad $_v 16)"; _pad=2;;
+			16) _v="$(rightpad $_v 8)"; _pad=1;;
+		esac
 		_binstr="$_binstr$_v"
 	done
 
@@ -127,14 +125,11 @@ b64_encode() {
 		esac
 		_b64str="$_b64str$_c"
 	done
-
-	if [ $_pad -eq 1 ]; then
-		echo $_b64str | sed 's/A$/=/'
-	elif [ $_pad -eq 2 ]; then
-		echo $_b64str | sed 's/AA$/==/'
-	else
-		echo $_b64str
-	fi
+	case $_pad in
+		1) echo $_b64str | sed 's/A$/=/';;
+		2) echo $_b64str | sed 's/AA$/==/';;
+		*) echo $_b64str;;
+	esac
 }
 
 if [ "${BASE64PROGNAME%.sh}" = "base64" ]; then
