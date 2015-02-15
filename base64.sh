@@ -26,7 +26,7 @@ usage() {
  
 . encode.sh
 
-b64_encode() {
+base64_encode() {
 	set +u
 	local _blocks="$(printf "$1" | sed 's/.../& /g')"
 	set -u
@@ -186,6 +186,6 @@ if [ "${BASE64PROGNAME%.sh}" = "base64" ]; then
 		fi
 	fi
 
-	b64_encode "$sflag"
+	base64_encode "$sflag"
 fi
 
