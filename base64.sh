@@ -28,107 +28,109 @@ usage() {
 
 b64_encode() {
 	set +u
-	local _value="$(printf "$1" | sed 's/.../& /g')"
+	local _blocks="$(printf "$1" | sed 's/.../& /g')"
 	set -u
-	local _c=""
-	local _binstr=""
-	local _b64str=""
+	local _block=""
+	local _instr=""
+	local _outstr=""
 	local _pad=0
 
-	for _c in $_value; do
-		local _v=""
-		for _b in $(echo $_c | sed 's/./& /g'); do
-			_bval="$(to_value $_b)"
+	for _block in $_blocks; do
+		local _byte=""
+		local _binblock=""
+		for _byte in $(echo $_block | sed 's/./& /g'); do
+			_decbyte="$(to_value $_byte)"
 			# Converts back \f to \n
-			if [ $_bval -eq 12 ]; then
-				_b="00001010"
+			if [ $_decbyte -eq 12 ]; then
+				_byte="00001010"
 			else
-				_b="$(to_binary $_bval)"
+				_byte="$(to_binary $_decbyte)"
 			fi
-			_v="$_v$_b"
+			_binblock="$_binblock$_byte"
 		done
-		local _len="$(echo -n $_v | wc -c | tr -d ' ')"
+		local _len="$(echo -n $_binblock | wc -c | tr -d ' ')"
 		case $_len in
-			8) _v="$(rightpad $_v 16)"; _pad=2;;
-			16) _v="$(rightpad $_v 8)"; _pad=1;;
+			8) _binblock="$(rightpad $_binblock 16)"; _pad=2;;
+			16) _binblock="$(rightpad $_binblock 8)"; _pad=1;;
 		esac
-		_binstr="$_binstr$_v"
+		_instr="$_instr$_binblock"
 	done
 
-	for _c in $(echo $_binstr | sed 's/....../& /g'); do
-		_c="$(to_decimal $_c)"
-		case $_c in
-			0) _c="A";;
-			1) _c="B";;
-			2) _c="C";;
-			3) _c="D";;
-			4) _c="E";;
-			5) _c="F";;
-			6) _c="G";;
-			7) _c="H";;
-			8) _c="I";;
-			9) _c="J";;
-			10) _c="K";;
-			11) _c="L";;
-			12) _c="M";;
-			13) _c="N";;
-			14) _c="O";;
-			15) _c="P";;
-			16) _c="Q";;
-			17) _c="R";;
-			18) _c="S";;
-			19) _c="T";;
-			20) _c="U";;
-			21) _c="V";;
-			22) _c="Z";;
-			23) _c="X";;
-			24) _c="Y";;
-			25) _c="Z";;
-			26) _c="a";;
-			27) _c="b";;
-			28) _c="c";;
-			29) _c="d";;
-			30) _c="e";;
-			31) _c="f";;
-			32) _c="g";;
-			33) _c="h";;
-			34) _c="i";;
-			35) _c="j";;
-			36) _c="k";;
-			37) _c="l";;
-			38) _c="m";;
-			39) _c="n";;
-			40) _c="o";;
-			41) _c="p";;
-			42) _c="q";;
-			43) _c="r";;
-			44) _c="s";;
-			45) _c="t";;
-			46) _c="u";;
-			47) _c="v";;
-			48) _c="w";;
-			49) _c="x";;
-			50) _c="y";;
-			51) _c="z";;
-			52) _c="0";;
-			53) _c="1";;
-			54) _c="2";;
-			55) _c="3";;
-			56) _c="4";;
-			57) _c="5";;
-			58) _c="6";;
-			59) _c="7";;
-			60) _c="8";;
-			61) _c="9";;
-			62) _c="+";;
-			63) _c="/";;
+	_blocks="$(echo $_instr | sed 's/....../& /g')"
+	for _block in $_blocks; do
+		_block="$(to_decimal $_block)"
+		case $_block in
+			0) _block="A";;
+			1) _block="B";;
+			2) _block="C";;
+			3) _block="D";;
+			4) _block="E";;
+			5) _block="F";;
+			6) _block="G";;
+			7) _block="H";;
+			8) _block="I";;
+			9) _block="J";;
+			10) _block="K";;
+			11) _block="L";;
+			12) _block="M";;
+			13) _block="N";;
+			14) _block="O";;
+			15) _block="P";;
+			16) _block="Q";;
+			17) _block="R";;
+			18) _block="S";;
+			19) _block="T";;
+			20) _block="U";;
+			21) _block="V";;
+			22) _block="Z";;
+			23) _block="X";;
+			24) _block="Y";;
+			25) _block="Z";;
+			26) _block="a";;
+			27) _block="b";;
+			28) _block="c";;
+			29) _block="d";;
+			30) _block="e";;
+			31) _block="f";;
+			32) _block="g";;
+			33) _block="h";;
+			34) _block="i";;
+			35) _block="j";;
+			36) _block="k";;
+			37) _block="l";;
+			38) _block="m";;
+			39) _block="n";;
+			40) _block="o";;
+			41) _block="p";;
+			42) _block="q";;
+			43) _block="r";;
+			44) _block="s";;
+			45) _block="t";;
+			46) _block="u";;
+			47) _block="v";;
+			48) _block="w";;
+			49) _block="x";;
+			50) _block="y";;
+			51) _block="z";;
+			52) _block="0";;
+			53) _block="1";;
+			54) _block="2";;
+			55) _block="3";;
+			56) _block="4";;
+			57) _block="5";;
+			58) _block="6";;
+			59) _block="7";;
+			60) _block="8";;
+			61) _block="9";;
+			62) _block="+";;
+			63) _block="/";;
 		esac
-		_b64str="$_b64str$_c"
+		_outstr="$_outstr$_block"
 	done
 	case $_pad in
-		1) echo $_b64str | sed 's/A$/=/';;
-		2) echo $_b64str | sed 's/AA$/==/';;
-		*) echo $_b64str;;
+		1) echo $_outstr | sed 's/A$/=/';;
+		2) echo $_outstr | sed 's/AA$/==/';;
+		*) echo $_outstr;;
 	esac
 }
 
