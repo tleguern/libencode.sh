@@ -17,13 +17,8 @@
 
 set -e
 
-readonly BASE64PROGNAME="$(basename $0)"
 readonly BASE64VERSION='v1.0'
- 
-usage() {
-	echo "usage: $BASE64PROGNAME [-s string | file]"
-}
- 
+
 . encode.sh
 
 base64_encode() {
@@ -133,59 +128,4 @@ base64_encode() {
 		*) echo $_outstr;;
 	esac
 }
-
-if [ "${BASE64PROGNAME%.sh}" = "base64" ]; then
-	file=""
-	sflag=""
-
-	while getopts ":s:" opt;do
-		case $opt in
-			s) sflag="$OPTARG";;
-			:) echo "$BASE64PROGNAME: option requires an argument -- $OPTARG";
-			   usage; exit 1;;
-			?) echo "$BASE64PROGNAME: unkown option -- $OPTARG";
-			   usage; exit 1;;
-			*) usage; exit 1;;
-		esac
-	done
-	shift $(( $OPTIND - 1 ))
-
-	if [ -n "$1" ]; then
-		file="$1"
-		shift
-	fi
-
-	if [ $# -ge 1 ]; then
-		echo "$BASE64PROGNAME: invalid trailing chars -- $@"
-		usage
-		exit 1
-	fi
-
-	set -u
-
-	if [ -n "$sflag" ] && [ -n "$file" ]; then
-		usage
-		exit 1
-	fi
-	if [ -z "$sflag" ] && [ -z "$file" ]; then
-		usage
-		exit 1
-	fi
-	if [ -n "$file" ]; then
-		if [ -f "$file" ]; then
-			#
-			# Converts \n to \f to prevent the shell from 
-			# stripping then
-			#
-			OLDIFS="$IFS"
-			IFS=''
-			sflag="$(cat $file | tr '\n' '\f')"
-			IFS="$OLDIFS"
-		else
-			echo "$BASE64PROGNAME: $file: No such file"
-		fi
-	fi
-
-	base64_encode "$sflag"
-fi
 
