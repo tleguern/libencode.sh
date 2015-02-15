@@ -144,9 +144,9 @@ if [ "${BASE64PROGNAME%.sh}" = "base64" ]; then
 	while getopts ":s:" opt;do
 		case $opt in
 			s) sflag="$OPTARG";;
-			:) echo "$PROGNAME: option requires an argument -- $OPTARG";
+			:) echo "$BASE64PROGNAME: option requires an argument -- $OPTARG";
 			   usage; exit 1;;
-			?) echo "$PROGNAME: unkown option -- $OPTARG";
+			?) echo "$BASE64PROGNAME: unkown option -- $OPTARG";
 			   usage; exit 1;;
 			*) usage; exit 1;;
 		esac
@@ -159,7 +159,7 @@ if [ "${BASE64PROGNAME%.sh}" = "base64" ]; then
 	fi
 
 	if [ $# -ge 1 ]; then
-		echo "$PROGNAME: invalid trailing chars -- $@"
+		echo "$BASE64PROGNAME: invalid trailing chars -- $@"
 		usage
 		exit 1
 	fi
