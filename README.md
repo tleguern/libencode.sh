@@ -8,8 +8,15 @@ encode.sh is generaly purpose library exposing various functionnalities
 like conversion from decimal to binary or string padding. It is used by 
 the other libraries.
 
-base64.sh implements the Base64 encoding algorithm. It is usable as a 
-standalone executable or as a library.
+base64.sh implements the Base64 encoding algorithm.
+
+base64url.sh implements the Base64 URL encoding algorithm.
+
+base32.sh implements the Base32 encoding algorithm.
+
+base32hex.sh implements the Base32 "Extended hex" encoding algorithm.
+
+base16.sh implements the Base16/Hex encoding algorithm.
 
 Compatibility
 -------------
