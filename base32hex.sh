@@ -93,10 +93,10 @@ base32hex_encode() {
 		_outstr="$_outstr$_block"
 	done
 	case $_pad in
-		1) echo $_outstr | sed 's/A$/=/';;
-		3) echo $_outstr | sed 's/AAA$/===/';;
-		4) echo $_outstr | sed 's/AAAA$/====/';;
-		6) echo $_outstr | sed 's/AAAAAA$/======/';;
+		1) echo $_outstr | sed 's/0$/=/';;
+		3) echo $_outstr | sed 's/000$/===/';;
+		4) echo $_outstr | sed 's/0000$/====/';;
+		6) echo $_outstr | sed 's/000000$/======/';;
 		*) echo $_outstr;;
 	esac
 }
