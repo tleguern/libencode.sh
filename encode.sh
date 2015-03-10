@@ -109,3 +109,27 @@ to_decimal() {
 	local _bc="obase=10; ibase=2; print $_value;"
 	echo "$_bc" | bc
 }
+
+#
+# to_ascii() converts the given decimal $_value to an ASCII char
+#
+to_ascii() {
+	set +u
+	local _value="$1"
+	set -u
+
+	awk -v v="$_value" 'BEGIN { printf "%c", v; exit }'
+}
+
+#
+# to_hexadecimal() converts the given decimal $_value to hexadecimal
+#
+to_hexadecimal() {
+	set +u
+	local _value="$1"
+	set -u
+
+	local _bc="obase=10; ibase=16; print $_value;"
+	echo "$_bc" | bc
+}
+
