@@ -19,7 +19,7 @@ set -e
 
 readonly BASE32VERSION='v1.0'
 
-. encode.sh
+. ./encode.sh
 
 base32_encode() {
 	set +u

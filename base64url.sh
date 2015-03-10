@@ -19,7 +19,7 @@ set -e
 
 readonly BASE64URLVERSION='v1.0'
  
-. encode.sh
+. ./encode.sh
 
 base64url_encode() {
 	set +u

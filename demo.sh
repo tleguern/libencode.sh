@@ -55,11 +55,11 @@ fi
 set -u
 
 case "$eflag" in
-	base16|hex) . base16.sh;;
-	base32) . base32.sh;;
-	base32hex) . base32hex.sh;;
-	base64) . base64.sh;;
-	base64url) . base64url.sh;;
+	base16|hex) . ./base16.sh;;
+	base32) . ./base32.sh;;
+	base32hex) . ./base32hex.sh;;
+	base64) . ./base64.sh;;
+	base64url) . ./base64url.sh;;
 	*) echo "$PROGNAME: invalid encoding algorithm -- $eflag";;
 esac
 if [ -n "$sflag" ] && [ -n "$file" ]; then

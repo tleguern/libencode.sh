@@ -19,7 +19,7 @@ set -e
 
 readonly BASE16VERSION='v1.0'
  
-. encode.sh
+. ./encode.sh
 
 base16_encode() {
 	set +u
