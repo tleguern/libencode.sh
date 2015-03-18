@@ -138,3 +138,15 @@ to_hexadecimal() {
 	echo "$_bc" | bc
 }
 
+#
+# swap32() reverses the byte ordering of the given 32-bits binary value
+#
+swap32() {
+	set +u
+	local _value="$1"
+	set -u
+
+	_value="$(echo $_value | sed -E "s/[01]{8}/& /g")"
+	echo "$(echo $_value|cut -d' ' -f4)$(echo $_value|cut -d' ' -f3)$(echo $_value|cut -d' ' -f2)$(echo $_value|cut -d' ' -f1)"
+}
+
