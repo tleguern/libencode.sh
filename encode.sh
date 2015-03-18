@@ -46,6 +46,11 @@ leftpad() {
 	local _i=0
 	local _res="$_value"
 
+	if [ $_num -eq 0 ]; then
+		echo "$_res"
+		return 0
+	fi
+
 	for _i in $(enum 0 $_num); do
 		_res="${_pad}${_res}"
 	done
