@@ -100,9 +100,9 @@ chr() {
 }
 
 #
-# to_binary() converts the given decimal $_value to binary
+# dectobin() converts the given decimal $_value to binary
 #
-to_binary() {
+dectobin() {
 	set +u
 	local _value="$1"
 	set -u
@@ -119,9 +119,9 @@ to_binary() {
 }
 
 #
-# to_decimal() converts the given binary $_value to decimal
+# bintodec() converts the given binary $_value to decimal
 #
-to_decimal() {
+bintodec() {
 	set +u
 	local _value="$1"
 	set -u
@@ -131,9 +131,9 @@ to_decimal() {
 }
 
 #
-# to_hexadecimal() converts the given decimal $_value to hexadecimal
+# dectohex() converts the given decimal $_value to hexadecimal
 #
-to_hexadecimal() {
+dectohex() {
 	set +u
 	local _value="$1"
 	set -u

@@ -39,7 +39,7 @@ base16_encode() {
 			if [ $_decbyte -eq 12 ]; then
 				_byte="00001010"
 			else
-				_byte="$(to_binary $_decbyte)"
+				_byte="$(dectobin $_decbyte)"
 			fi
 			_binblock="$_binblock$_byte"
 		done
@@ -48,7 +48,7 @@ base16_encode() {
 
 	_blocks="$(echo $_instr | sed 's/..../& /g')"
 	for _block in $_blocks; do
-		_block="$(to_decimal $_block)"
+		_block="$(bintodec $_block)"
 		case $_block in
 			0) _block="0";;
 			1) _block="1";;
