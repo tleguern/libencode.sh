@@ -89,6 +89,17 @@ ord() {
 }
 
 #
+# chr() converts the given decimal $_value to an ASCII char
+#
+chr() {
+	set +u
+	local _value="$1"
+	set -u
+
+	awk -v v="$_value" 'BEGIN { printf "%c", v; exit }'
+}
+
+#
 # to_binary() converts the given decimal $_value to binary
 #
 to_binary() {
@@ -117,17 +128,6 @@ to_decimal() {
 
 	local _bc="obase=10; ibase=2; print $_value;"
 	echo "$_bc" | bc
-}
-
-#
-# chr() converts the given decimal $_value to an ASCII char
-#
-chr() {
-	set +u
-	local _value="$1"
-	set -u
-
-	awk -v v="$_value" 'BEGIN { printf "%c", v; exit }'
 }
 
 #
