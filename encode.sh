@@ -78,9 +78,9 @@ rightpad() {
 }
 
 #
-# to_value() converts the given ASCII char to a decimal value
+# ord() converts the given ASCII char to a decimal value
 #
-to_value() {
+ord() {
 	set +u
 	local _value="$1"
 	set -u
@@ -120,9 +120,9 @@ to_decimal() {
 }
 
 #
-# to_ascii() converts the given decimal $_value to an ASCII char
+# chr() converts the given decimal $_value to an ASCII char
 #
-to_ascii() {
+chr() {
 	set +u
 	local _value="$1"
 	set -u

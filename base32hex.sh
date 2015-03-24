@@ -34,7 +34,7 @@ base32hex_encode() {
 		local _byte=""
 		local _binblock=""
 		for _byte in $(echo $_block | sed 's/./& /g'); do
-			_decbyte="$(to_value $_byte)"
+			_decbyte="$(ord $_byte)"
 			# Converts back \f to \n
 			if [ $_decbyte -eq 12 ]; then
 				_byte="00001010"
