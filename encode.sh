@@ -98,9 +98,13 @@ to_binary() {
 
 	local _bc="ibase=10; obase=2; print $_value;"
 
-	local _res=$(echo "$_bc" | bc)
-	_res=$(leftpad "$_res" $((8 - $(echo -n $_res | wc -c))))
-	echo $_res
+	local _res="$(echo "$_bc" | bc)"
+	local _len="$(echo -n $_res | wc -c)"
+	local _des=$(( $_len / 8 + ($_len % 8 != 0) ))
+	local _num=$(( $_des * 8 - $_len  ))
+
+	_res="$(leftpad $_res $_num)"
+	echo "$_res"
 }
 
 #
