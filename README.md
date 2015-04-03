@@ -4,7 +4,7 @@ encode.sh
 This repository contains a series of libraries designed to perform 
 binary to text encoding in shell script.
 
-encode.sh is generaly purpose library exposing various functionnalities 
+encode.sh is a general purpose library exposing various functionalities 
 like conversion from decimal to binary or string padding. It is used by 
 the other libraries.
 
