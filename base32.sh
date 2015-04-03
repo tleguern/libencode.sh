@@ -14,9 +14,8 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
 
-readonly BASE32VERSION='v1.0'
-
-. ./encode.sh
+LIBNAME="libencode_base32.sh"
+LIBVERSION="1.0"
 
 base32_encode() {
 	local _blocks="$(printf "$1" | sed 's/...../& /g')"

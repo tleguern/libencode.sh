@@ -14,6 +14,9 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
 
+LIBNAME="libencode.sh"
+LIBVERSION="1.0"
+
 fs=$(awk -v v=28 'BEGIN { printf "%c", v; exit }')
 gs=$(awk -v v=29 'BEGIN { printf "%c", v; exit }')
 rs=$(awk -v v=30 'BEGIN { printf "%c", v; exit }')

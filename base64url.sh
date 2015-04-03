@@ -14,9 +14,8 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
 
-readonly BASE64URLVERSION='v1.0'
- 
-. ./encode.sh
+LIBNAME="libencode_base64url.sh"
+LIBVERSION="1.0"
 
 base64url_encode() {
 	local _blocks="$(printf "$1" | sed 's/.../& /g')"
