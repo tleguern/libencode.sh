@@ -14,9 +14,8 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
 
-readonly BASE16VERSION='v1.0'
- 
-. ./encode.sh
+LIBNAME="libencode_base16.sh"
+LIBVERSION="1.0"
 
 base16_encode() {
 	local _blocks="$(printf "$1" | sed 's/./& /g')"
