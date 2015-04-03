@@ -2,6 +2,7 @@
 
 set -e
 
+. ../encode.sh
 . ../base16.sh
 . ../base32.sh
 . ../base32hex.sh
