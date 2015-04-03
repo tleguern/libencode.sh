@@ -1,4 +1,3 @@
-#!/bin/sh
 #
 # Copyright (c) 2015 Tristan Le Guern <tleguern@bouledef.eu>
 #
@@ -15,16 +14,12 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
 
-set -e
-
 readonly BASE64VERSION='v1.0'
 
 . ./encode.sh
 
 base64_encode() {
-	set +u
 	local _blocks="$(printf "$1" | sed "s/.../&$fs/g")"
-	set -u
 	local _block=""
 	local _instr=""
 	local _outstr=""
