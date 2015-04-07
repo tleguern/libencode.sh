@@ -18,30 +18,37 @@ LIBNAME="libencode_base16.sh"
 LIBVERSION="1.0"
 
 base16_encode() {
-	local _blocks="$(printf "$1" | sed 's/./& /g')"
+	local _blocks="$(printf "$1" | sed "s/./&$fs/g")"
 	local _block=""
 	local _instr=""
 	local _outstr=""
 	local _pad=0
 
+	OLDIFS="$IFS"
+	IFS="$fs"
 	for _block in $_blocks; do
 		local _byte=""
 		local _binblock=""
-		for _byte in $(echo $_block | sed 's/./& /g'); do
-			_decbyte="$(ord $_byte)"
-			# Converts back \f to \n
-			if [ $_decbyte -eq 12 ]; then
-				_byte="00001010"
-			else
-				_byte="$(dectobin $_decbyte)"
-			fi
+		local _bytes="$(echo $_block | sed "s/./&$gs/g")"
+		IFS="$gs"
+		for _byte in $_bytes; do
+			# ord() doesn't need a clean IFS but dectobin() does,
+			# because of its use of enum().
+			_byte="$(ord $_byte)"
+			IFS="$OLDIFS"
+			_byte="$(dectobin $_byte)"
 			_binblock="$_binblock$_byte"
+			IFS="$gs"
 		done
 		_instr="$_instr$_binblock"
+		IFS="$fs"
 	done
 
-	_blocks="$(echo $_instr | sed 's/..../& /g')"
+	IFS=" "
+	_blocks="$(echo $_instr | sed "s/..../&$fs/g")"
+	IFS="$fs"
 	for _block in $_blocks; do
+		IFS=" "
 		_block="$(bintodec $_block)"
 		case $_block in
 			0) _block="0";;
@@ -62,7 +69,9 @@ base16_encode() {
 			15) _block="F";;
 		esac
 		_outstr="$_outstr$_block"
+		IFS="$fs"
 	done
+	IFS="$OLDIFS"
 	echo $_outstr
 }
 
