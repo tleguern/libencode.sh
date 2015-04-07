@@ -34,8 +34,7 @@ base64_encode() {
 		IFS="$gs"
 		for _byte in $_bytes; do
 			IFS=" "
-			_decbyte="$(ord $_byte)"
-			_byte="$(dectobin $_decbyte)"
+			_byte="$(dectobin $(ord $_byte))"
 			_binblock="$_binblock$_byte"
 			IFS="$gs"
 		done
