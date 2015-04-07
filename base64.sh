@@ -38,7 +38,7 @@ base64_encode() {
 			_binblock="$_binblock$_byte"
 			IFS="$gs"
 		done
-		IFS=" "
+		IFS="$OLDIFS"
 		local _len="$(echo -n $_binblock | wc -c | tr -d ' ')"
 		case $_len in
 			8) _binblock="$(rightpad $_binblock 16)"; _pad=2;;
