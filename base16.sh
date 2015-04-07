@@ -74,6 +74,7 @@ base16_encode() {
 		IFS="$fs"
 	done
 	IFS="$OLDIFS"
+	unset OLDIFS
 	echo $_outstr
 }
 

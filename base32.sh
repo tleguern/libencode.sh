@@ -98,6 +98,7 @@ base32_encode() {
 		IFS="$fs"
 	done
 	IFS="$OLDIFS"
+	unset OLDIFS
 	case $_pad in
 		1) echo $_outstr | sed 's/A$/=/';;
 		3) echo $_outstr | sed 's/AAA$/===/';;
