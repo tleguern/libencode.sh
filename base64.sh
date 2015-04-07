@@ -27,14 +27,16 @@ base64_encode() {
 	OLDIFS="$IFS"
 	IFS="$fs"
 	for _block in $_blocks; do
-		IFS=" "
 		local _byte=""
 		local _binblock=""
 		local _bytes="$(echo $_block | sed "s/./&$gs/g")"
 		IFS="$gs"
 		for _byte in $_bytes; do
-			IFS=" "
-			_byte="$(dectobin $(ord $_byte))"
+			# ord() doesn't need a clean IFS but dectobin() does,
+			# because of its use of enum().
+			_byte="$(ord $_byte)"
+			IFS="$OLDIFS"
+			_byte="$(dectobin $_byte)"
 			_binblock="$_binblock$_byte"
 			IFS="$gs"
 		done
