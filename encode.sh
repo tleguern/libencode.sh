@@ -88,7 +88,7 @@ ord() {
 	local _value="$1"
 	set -u
 
-	printf "%d" "'$1"
+	printf "%d" "'$_value"
 }
 
 #
