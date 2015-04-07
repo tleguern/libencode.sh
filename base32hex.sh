@@ -31,6 +31,7 @@ base32hex_encode() {
 		local _binblock=""
 		local _bytes="$(echo $_block | sed "s/./&$gs/g")"
 		IFS="$gs"
+		set -f
 		for _byte in $_bytes; do
 			# ord() doesn't need a clean IFS but dectobin() does,
 			# because of its use of enum().
@@ -39,6 +40,7 @@ base32hex_encode() {
 			_byte="$(dectobin $_byte)"
 			_binblock="$_binblock$_byte"
 			IFS="$gs"
+			set +f
 		done
 		IFS="$OLDIFS"
 		local _len="$(echo -n $_binblock | wc -c | tr -d ' ')"
