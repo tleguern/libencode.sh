@@ -54,6 +54,8 @@ fi
 
 set -u
 
+. ./encode.sh
+
 case "$eflag" in
 	base16|hex) . ./base16.sh;;
 	base32) . ./base32.sh;;
