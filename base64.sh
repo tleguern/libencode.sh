@@ -41,8 +41,8 @@ base64_encode() {
 		IFS=" "
 		local _len="$(echo -n $_binblock | wc -c | tr -d ' ')"
 		case $_len in
-			8) echo "Pad 16!"; _binblock="$(rightpad $_binblock 16)"; _pad=2;;
-			16) echo "Pad 8!"; _binblock="$(rightpad $_binblock 8)"; _pad=1;;
+			8) _binblock="$(rightpad $_binblock 16)"; _pad=2;;
+			16) _binblock="$(rightpad $_binblock 8)"; _pad=1;;
 		esac
 		_instr="$_instr$_binblock"
 		IFS="$fs"
