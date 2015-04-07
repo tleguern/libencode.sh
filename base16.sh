@@ -18,7 +18,7 @@ LIBNAME="libencode_base16.sh"
 LIBVERSION="1.0"
 
 base16_encode() {
-	local _blocks="$(printf "$1" | sed "s/./&$fs/g")"
+	local _blocks="$(echo "$1" | sed "s/./&$fs/g")"
 	local _block=""
 	local _instr=""
 	local _outstr=""

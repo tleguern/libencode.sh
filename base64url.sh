@@ -18,7 +18,7 @@ LIBNAME="libencode_base64url.sh"
 LIBVERSION="1.0"
 
 base64url_encode() {
-	local _blocks="$(printf "$1" | sed "s/.../&$fs/g")"
+	local _blocks="$(echo "$1" | sed "s/.../&$fs/g")"
 	local _block=""
 	local _instr=""
 	local _outstr=""
