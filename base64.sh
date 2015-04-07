@@ -18,35 +18,43 @@ LIBNAME="libencode_base64.sh"
 LIBVERSION="1.0"
 
 base64_encode() {
-	local _blocks="$(printf "$1" | sed 's/.../& /g')"
+	local _blocks="$(printf "$1" | sed "s/.../&$fs/g")"
 	local _block=""
 	local _instr=""
 	local _outstr=""
 	local _pad=0
 
+	OLDIFS="$IFS"
+	IFS="$fs"
 	for _block in $_blocks; do
 		local _byte=""
 		local _binblock=""
-		for _byte in $(echo $_block | sed 's/./& /g'); do
-			_decbyte="$(ord $_byte)"
-			# Converts back \f to \n
-			if [ $_decbyte -eq 12 ]; then
-				_byte="00001010"
-			else
-				_byte="$(dectobin $_decbyte)"
-			fi
+		local _bytes="$(echo $_block | sed "s/./&$gs/g")"
+		IFS="$gs"
+		for _byte in $_bytes; do
+			# ord() doesn't need a clean IFS but dectobin() does,
+			# because of its use of enum().
+			_byte="$(ord $_byte)"
+			IFS="$OLDIFS"
+			_byte="$(dectobin $_byte)"
 			_binblock="$_binblock$_byte"
+			IFS="$gs"
 		done
+		IFS="$OLDIFS"
 		local _len="$(echo -n $_binblock | wc -c | tr -d ' ')"
 		case $_len in
 			8) _binblock="$(rightpad $_binblock 16)"; _pad=2;;
 			16) _binblock="$(rightpad $_binblock 8)"; _pad=1;;
 		esac
 		_instr="$_instr$_binblock"
+		IFS="$fs"
 	done
 
-	_blocks="$(echo $_instr | sed 's/....../& /g')"
+	IFS=" "
+	_blocks="$(echo $_instr | sed "s/....../&$fs/g")"
+	IFS="$fs"
 	for _block in $_blocks; do
+		IFS=" "
 		_block="$(bintodec $_block)"
 		case $_block in
 			0) _block="A";;
@@ -115,7 +123,9 @@ base64_encode() {
 			63) _block="/";;
 		esac
 		_outstr="$_outstr$_block"
+		IFS="$fs"
 	done
+	IFS="$OLDIFS"
 	case $_pad in
 		1) echo $_outstr | sed 's/A$/=/';;
 		2) echo $_outstr | sed 's/AA$/==/';;
