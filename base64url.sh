@@ -26,12 +26,12 @@ base64url_encode() {
 
 	OLDIFS="$IFS"
 	IFS="$fs"
+	set -f
 	for _block in $_blocks; do
 		local _byte=""
 		local _binblock=""
 		local _bytes="$(echo $_block | sed "s/./&$gs/g")"
 		IFS="$gs"
-		set -f
 		for _byte in $_bytes; do
 			# ord() doesn't need a clean IFS but dectobin() does,
 			# because of its use of enum().
@@ -40,7 +40,6 @@ base64url_encode() {
 			_byte="$(dectobin $_byte)"
 			_binblock="$_binblock$_byte"
 			IFS="$gs"
-			set +f
 		done
 		IFS="$OLDIFS"
 		local _len="$(echo -n $_binblock | wc -c | tr -d ' ')"
@@ -51,6 +50,7 @@ base64url_encode() {
 		_instr="$_instr$_binblock"
 		IFS="$fs"
 	done
+	set +f
 
 	IFS=" "
 	_blocks="$(echo $_instr | sed "s/....../&$fs/g")"
