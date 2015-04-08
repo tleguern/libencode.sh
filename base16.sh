@@ -47,7 +47,7 @@ base16_encode() {
 	set +f
 
 	IFS=" "
-	_blocks="$(echo $_instr | sed "s/..../&$fs/g")"
+	_blocks="$(echo $_instr | sed -E "s/.{4}/&$fs/g")"
 	IFS="$fs"
 	for _block in $_blocks; do
 		IFS=" "

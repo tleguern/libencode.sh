@@ -18,7 +18,7 @@ LIBNAME="libencode_base32hex.sh"
 LIBVERSION="1.0"
 
 base32hex_encode() {
-	local _blocks="$(echo "$1" | sed "s/...../&$fs/g")"
+	local _blocks="$(echo "$1" | sed -E "s/.{5}/&$fs/g")"
 	local _block=""
 	local _instr=""
 	local _outstr=""
@@ -55,7 +55,7 @@ base32hex_encode() {
 	set +f
 
 	IFS=" "
-	_blocks="$(echo $_instr | sed "s/...../&$fs/g")"
+	_blocks="$(echo $_instr | sed -E "s/.{5}/&$fs/g")"
 	IFS="$fs"
 	for _block in $_blocks; do
 		IFS=" "
