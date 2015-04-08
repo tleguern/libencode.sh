@@ -1,5 +1,5 @@
-encode.sh
-=========
+libencode.sh
+============
 
 This repository contains a series of libraries designed to perform 
 binary to text encoding in shell script.
@@ -21,10 +21,11 @@ base16.sh implements the Base16/Hex encoding algorithm.
 Compatibility
 -------------
 
-encode.sh scripts are known to run with the following shells:
+libencode.sh targets shells supporting the KSH “local” extension. It is
+therefore known to run with the following shells:
 
-- Public Domain Korn SHell - pdksh;
-- OpenBSD Korn SHell - oksh
-- MirBSD Korn SHell - mksh;
+- Debian Almquist SHell - dash;
 - GNU Bourne-Again SHell - bash;
-
+- MirBSD Korn SHell - mksh;
+- OpenBSD Korn SHell - oksh
+- Public Domain Korn SHell - pdksh;
