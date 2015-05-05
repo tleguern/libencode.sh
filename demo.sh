@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/ksh
 #
 # Copyright (c) 2015 Tristan Le Guern <tleguern@bouledef.eu>
 #
@@ -54,14 +54,15 @@ fi
 
 set -u
 
-. ./encode.sh
+autoload base16_encode
+autoload hex_encode
+autoload base32_encode
+autoload base32hex_encode
+autoload base64_encode
+autoload base64url_encode
 
 case "$eflag" in
-	base16|hex) . ./base16.sh;;
-	base32) . ./base32.sh;;
-	base32hex) . ./base32hex.sh;;
-	base64) . ./base64.sh;;
-	base64url) . ./base64url.sh;;
+	hex|base16|base32|base32hex|base64|base64url) :;;
 	*) echo "$PROGNAME: invalid encoding algorithm -- $eflag";;
 esac
 if [ -n "$sflag" ] && [ -n "$file" ]; then
