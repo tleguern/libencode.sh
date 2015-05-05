@@ -18,20 +18,22 @@ LIBNAME="libencode_base16.sh"
 LIBVERSION="1.0"
 
 base16_encode() {
-	local _blocks="$(echo "$1" | sed "s/./&$fs/g")"
+	local _fs=$(awk -v v=28 'BEGIN { printf "%c", v; exit }')
+	local _gs=$(awk -v v=29 'BEGIN { printf "%c", v; exit }')
+	local _blocks="$(echo "$1" | sed "s/./&$_fs/g")"
 	local _block=""
 	local _instr=""
 	local _outstr=""
 	local _pad=0
 
 	OLDIFS="$IFS"
-	IFS="$fs"
+	IFS="$_fs"
 	set -f
 	for _block in $_blocks; do
 		local _byte=""
 		local _binblock=""
-		local _bytes="$(echo $_block | sed "s/./&$gs/g")"
-		IFS="$gs"
+		local _bytes="$(echo $_block | sed "s/./&$_gs/g")"
+		IFS="$_gs"
 		for _byte in $_bytes; do
 			# ord() doesn't need a clean IFS but dectobin() does,
 			# because of its use of enum().
@@ -39,16 +41,16 @@ base16_encode() {
 			IFS="$OLDIFS"
 			_byte="$(dectobin $_byte)"
 			_binblock="$_binblock$_byte"
-			IFS="$gs"
+			IFS="$_gs"
 		done
 		_instr="$_instr$_binblock"
-		IFS="$fs"
+		IFS="$_fs"
 	done
 	set +f
 
 	IFS=" "
-	_blocks="$(echo $_instr | sed -E "s/.{4}/&$fs/g")"
-	IFS="$fs"
+	_blocks="$(echo $_instr | sed -E "s/.{4}/&$_fs/g")"
+	IFS="$_fs"
 	for _block in $_blocks; do
 		IFS=" "
 		_block="$(bintodec $_block)"
@@ -71,7 +73,7 @@ base16_encode() {
 			15) _block="F";;
 		esac
 		_outstr="$_outstr$_block"
-		IFS="$fs"
+		IFS="$_fs"
 	done
 	IFS="$OLDIFS"
 	unset OLDIFS
