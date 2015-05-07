@@ -25,10 +25,16 @@ base16_encode() {
 	local _instr=""
 	local _outstr=""
 	local _pad=0
+	local _resetf=0
+
+	# Unset globing if the option is not already activated
+	if ! echo $- | grep f > /dev/null 2>&1; then
+		set -f
+		_resetf=1
+	fi
 
 	OLDIFS="$IFS"
 	IFS="$_fs"
-	set -f
 	for _block in $_blocks; do
 		local _byte=""
 		local _binblock=""
@@ -46,7 +52,7 @@ base16_encode() {
 		_instr="$_instr$_binblock"
 		IFS="$_fs"
 	done
-	set +f
+	[ $_resetf -eq 1 ] && set +f
 
 	IFS=" "
 	_blocks="$(echo $_instr | sed -E "s/.{4}/&$_fs/g")"
