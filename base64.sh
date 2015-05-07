@@ -138,3 +138,6 @@ base64_encode() {
 	esac
 }
 
+base64url_encode() {
+	base64_encode "$@" | tr '+/' '-_'
+}

@@ -7,7 +7,6 @@ set -e
 . ../base32.sh
 . ../base32hex.sh
 . ../base64.sh
-. ../base64url.sh
 
 FAILED=0
 
