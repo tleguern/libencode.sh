@@ -45,10 +45,10 @@ correct FPATH environnement variable are mandatory :
     $ ln -s $LIBENCODEPATH/base32.sh base32_encode
     $ ln -s $LIBENCODEPATH/base32hex.sh base32hex_encode
     $ ln -s $LIBENCODEPATH/base64.sh base64_encode
-    $ ln -s $LIBENCODEPATH/base64url.sh base64url_encode
-    $ grep -E '^[a-z0-9]+\(' encode.sh | while read func; do \
-    > func="$(echo $func | cut -d'(' -f1)"
-    > echo ln -s $LIBENCODEPATH/encode.sh "$func"
+    $ ln -s $LIBENCODEPATH/base64.sh base64url_encode
+    $ grep -E '^[a-z0-9]+\(' $LIBENCODEPATH/encode.sh | while read func; do
+    > func="$(echo $func | cut -d'(' -f1)";
+    > ln -s $LIBENCODEPATH/encode.sh "$func";
     > done
     $ export FPATH=$FPATH:$HOME/sh
 
