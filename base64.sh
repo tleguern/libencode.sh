@@ -17,9 +17,9 @@
 encode_add_block() {
 	local _byte=""
 
-	local _bytes="$(echo "$1" | sed "s/./&$encode_fs/g")"
+	local _bytes="$(echo "$1" | sed "s/./&$encode_us/g")"
 	OLDIFS="$IFS"
-	IFS="$encode_fs"
+	IFS="$encode_us"
 	for _byte in $_bytes; do
 		# ord() doesn't need a clean IFS but dectobin() does,
 		# because of its use of enum().
@@ -27,7 +27,7 @@ encode_add_block() {
 		IFS="$OLDIFS"
 		_byte="$(dectobin $_byte)"
 		encode_block="${encode_block}${_byte}"
-		IFS="$encode_fs"
+		IFS="$encode_us"
 	done
 	IFS="$OLDIFS"
 }
@@ -38,7 +38,7 @@ encode_add_blocks() {
 	local _block=""
 
 	OLDIFS="$IFS"
-	IFS="$encode_fs"
+	IFS="$encode_us"
 	for _block in $_blocks; do
 		IFS="$OLDIFS"
 		if [ ${#_block} -ne $_block_size ]; then
@@ -46,7 +46,7 @@ encode_add_blocks() {
 		fi
 		encode_add_block "$_block"
 		encode_blocks="${encode_blocks}${encode_block}"
-		IFS="$encode_fs"
+		IFS="$encode_us"
 		# Reset for next time
 		encode_block=""
 	done
@@ -70,7 +70,7 @@ encode_init() {
 	encode_block=""
 	encode_blocks=""
 	encode_dirty_block=""
-	encode_fs=$(awk -v v=28 'BEGIN { printf "%c", v; exit }')
+	encode_us=$(printf "\037")
 	encode_padded=0
 	# Unset globing if the option is not already activated
 	if ! echo $- | grep f > /dev/null 2>&1; then
@@ -88,7 +88,7 @@ encode_cleanup() {
 	unset encode_block
 	unset encode_blocks
 	unset encode_dirty_block
-	unset encode_fs
+	unset encode_us
 	unset encode_padded
 	unset encode_resetf
 	unset OLDIFS
@@ -100,7 +100,7 @@ base64_encode() {
 	local _bits=6
 
 	local _block=""
-	local _blocks="$(echo "$1"|sed -E "s/.{$_groups}/&$encode_fs/g")"
+	local _blocks="$(echo "$1"|sed -E "s/.{$_groups}/&$encode_us/g")"
 	local _outstr=""
 
 	encode_add_blocks $_groups "$_blocks"
@@ -108,8 +108,8 @@ base64_encode() {
 
 	OLDIFS="$IFS"
 	IFS=" "
-	encode_blocks=$(echo $encode_blocks|sed -E "s/.{$_bits}/&$encode_fs/g")
-	IFS="$encode_fs"
+	encode_blocks=$(echo $encode_blocks|sed -E "s/.{$_bits}/&$encode_us/g")
+	IFS="$encode_us"
 	for _block in $encode_blocks; do
 		IFS=" "
 		_block="$(bintodec $_block)"
@@ -180,7 +180,7 @@ base64_encode() {
 			63) _block="/";;
 		esac
 		_outstr="$_outstr$_block"
-		IFS="$encode_fs"
+		IFS="$encode_us"
 	done
 	IFS="$OLDIFS"
 	case $encode_padded in
@@ -201,7 +201,7 @@ base32_encode() {
 	local _bits=5
 
 	local _block=""
-	local _blocks="$(echo "$1"|sed -E "s/.{$_groups}/&$encode_fs/g")"
+	local _blocks="$(echo "$1"|sed -E "s/.{$_groups}/&$encode_us/g")"
 	local _outstr=""
 
 	encode_add_blocks $_groups "$_blocks"
@@ -209,8 +209,8 @@ base32_encode() {
 
 	OLDIFS="$IFS"
 	IFS=" "
-	encode_blocks=$(echo $encode_blocks|sed -E "s/.{$_bits}/&$encode_fs/g")
-	IFS="$encode_fs"
+	encode_blocks=$(echo $encode_blocks|sed -E "s/.{$_bits}/&$encode_us/g")
+	IFS="$encode_us"
 	for _block in $encode_blocks; do
 		IFS=" "
 		_block="$(bintodec $_block)"
@@ -249,7 +249,7 @@ base32_encode() {
 			31) _block="7";;
 		esac
 		_outstr="$_outstr$_block"
-		IFS="$encode_fs"
+		IFS="$encode_us"
 	done
 	IFS="$OLDIFS"
 	case $encode_padded in
@@ -268,7 +268,7 @@ base32hex_encode() {
 	local _bits=5
 
 	local _block=""
-	local _blocks="$(echo "$1"|sed -E "s/.{$_groups}/&$encode_fs/g")"
+	local _blocks="$(echo "$1"|sed -E "s/.{$_groups}/&$encode_us/g")"
 	local _outstr=""
 
 	encode_add_blocks $_groups "$_blocks"
@@ -276,8 +276,8 @@ base32hex_encode() {
 
 	OLDIFS="$IFS"
 	IFS=" "
-	encode_blocks=$(echo $encode_blocks|sed -E "s/.{$_bits}/&$encode_fs/g")
-	IFS="$encode_fs"
+	encode_blocks=$(echo $encode_blocks|sed -E "s/.{$_bits}/&$encode_us/g")
+	IFS="$encode_us"
 	for _block in $encode_blocks; do
 		IFS=" "
 		_block="$(bintodec $_block)"
@@ -316,7 +316,7 @@ base32hex_encode() {
 			31) _block="V";;
 		esac
 		_outstr="$_outstr$_block"
-		IFS="$encode_fs"
+		IFS="$encode_us"
 	done
 	IFS="$OLDIFS"
 	case $encode_padded in
@@ -335,7 +335,7 @@ base16_encode() {
 	local _bits=4
 
 	local _block=""
-	local _blocks="$(echo "$1"|sed -E "s/.{$_groups}/&$encode_fs/g")"
+	local _blocks="$(echo "$1"|sed -E "s/.{$_groups}/&$encode_us/g")"
 	local _outstr=""
 
 	encode_add_blocks $_groups "$_blocks"
@@ -343,8 +343,8 @@ base16_encode() {
 
 	OLDIFS="$IFS"
 	IFS=" "
-	encode_blocks=$(echo $encode_blocks|sed -E "s/.{$_bits}/&$encode_fs/g")
-	IFS="$encode_fs"
+	encode_blocks=$(echo $encode_blocks|sed -E "s/.{$_bits}/&$encode_us/g")
+	IFS="$encode_us"
 	for _block in $encode_blocks; do
 		IFS=" "
 		_block="$(bintodec $_block)"
@@ -367,7 +367,7 @@ base16_encode() {
 			15) _block="F";;
 		esac
 		_outstr="$_outstr$_block"
-		IFS="$encode_fs"
+		IFS="$encode_us"
 	done
 	IFS="$OLDIFS"
 	echo $_outstr
