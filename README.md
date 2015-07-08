@@ -22,6 +22,21 @@ therefore known to run with the following shells:
 - MirBSD Korn SHell - mksh ;
 - OpenBSD Korn SHell - oksh.
 
+Requirements
+------------
+
+The following utilities are needed by libencode:
+
+- awk ;
+- bc ;
+- cut ;
+- echo ;
+- grep ;
+- jot or seq ;
+- sed ;
+- wc ;
+- which.
+
 Demo
 ----
 
