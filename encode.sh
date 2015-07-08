@@ -21,14 +21,14 @@ LIBVERSION="1.0"
 # enum is a portable glue for enumerating between two numbers $_first and $_last
 #
 enum() {
-	_first="$1"
-	_last="$2"
-
 	if which jot > /dev/null 2>&1; then
-		jot $_last $_first $_last 1
-	else
-		seq $_first 1 $(( $_last - 1 ))
+		unset -f enum
+		enum() { jot $2 $1 $2 1; }
+	elif which seq > /dev/null 2>&1; then
+		unset -f enum
+		enum() { seq $1 1 $(( $2 - 1 )); }
 	fi
+	enum $1 $2
 }
 
 #
