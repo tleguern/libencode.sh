@@ -33,7 +33,6 @@ The following utilities are needed by libencode:
 - grep ;
 - jot or seq ;
 - sed ;
-- wc ;
 - which.
 
 Demo
