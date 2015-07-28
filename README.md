@@ -29,7 +29,6 @@ The following utilities are needed by libencode:
 
 - awk ;
 - bc ;
-- cut ;
 - echo ;
 - grep ;
 - jot or seq ;

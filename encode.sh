@@ -132,6 +132,10 @@ swap32() {
 	local _value="$1"
 
 	_value="$(echo $_value | sed -E "s/[01]{8}/& /g")"
-	echo "$(echo $_value|cut -d' ' -f4)$(echo $_value|cut -d' ' -f3)$(echo $_value|cut -d' ' -f2)$(echo $_value|cut -d' ' -f1)"
+	local _oldifs="$IFS"
+	IFS=" "
+	set $_value
+	echo $4$3$2$1
+	IFS="$_oldifs"
 }
 
