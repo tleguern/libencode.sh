@@ -98,8 +98,8 @@ dectobin() {
 
 	local _res="$(echo "$_bc" | bc)"
 	local _len="${#_res}"
-	local _des=$(( $_len / 8 + ($_len % 8 != 0) ))
-	local _num=$(( $_des * 8 - $_len  ))
+	local _des=$(( _len / 8 + (_len % 8 != 0) ))
+	local _num=$(( _des * 8 - _len  ))
 
 	_res="$(leftpad $_res $_num)"
 	echo "$_res"
