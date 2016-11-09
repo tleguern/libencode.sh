@@ -15,7 +15,7 @@
 #
 
 LIBNAME="libencode.sh"
-LIBVERSION="1.0"
+LIBVERSION="2.0"
 
 #
 # enum is a portable glue for enumerating between two numbers $_first and $_last
