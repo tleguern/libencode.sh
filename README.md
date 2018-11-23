@@ -32,8 +32,7 @@ The following utilities are needed by libencode:
 - echo ;
 - grep ;
 - jot or seq ;
-- sed ;
-- which.
+- sed.
 
 Demo
 ----
