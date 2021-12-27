@@ -1,9 +1,34 @@
 # libencode.sh
 
-This repository contains a series of libraries designed to perform binary to text encoding in shell script.
+Base64 family of binary-to-text encoding algorithms implemented in shell.
 
-* `encode.sh` is a general purpose library exposing various functionalities like conversion from decimal to binary or string padding.
-* `base64.sh` implements the Base64, Base64 URL, Base32, Base32 Hex and Base16 encoding algorithms.
+## Contents
+
+1. [Libraries](#libraries)
+2. [Compatibility](#compatibility)
+3. [Requirements](#requirements)
+4. [Demo](#demo)
+5. [License](#license)
+
+## Libraries
+
+* `encode.sh` is a general purpose library exposing various functionalities like conversion from decimal to binary or string padding. It exports the following functions:
+  * `enum`
+  * `leftpad`
+  * `rightpad`
+  * `ord`
+  * `chr`
+  * `dectobin`
+  * `bintodec`
+  * `dectohex`
+  * `swap32`
+* `base64.sh` implements the Base64, Base64 URL, Base32, Base32 Hex and Base16 encoding algorithms. The following functions are considered public:
+  * `base64_encode`
+  * `base64url_encode`
+  * `base32_encode`
+  * `base32hex_encode`
+  * `base16_encode`
+  * `hex_encode`
 
 ## Compatibility
 
@@ -59,3 +84,8 @@ It is also possible to use autoload in an interactive korn shell to use base64_e
     Zm9vYmFy
 
 Of course all of these awkward steps can be bypassed if you just this project as intended: as a library.
+
+## License
+
+All the code is licensed under the ISC License.
+It's free, not GPLed !
