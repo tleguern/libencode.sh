@@ -1,46 +1,35 @@
-libencode.sh
-============
+# libencode.sh
 
-This repository contains a series of libraries designed to perform 
-binary to text encoding in shell script.
+This repository contains a series of libraries designed to perform binary to text encoding in shell script.
 
-encode.sh is a general purpose library exposing various functionalities 
-like conversion from decimal to binary or string padding. It is used by 
-the other libraries.
+* `encode.sh` is a general purpose library exposing various functionalities like conversion from decimal to binary or string padding.
+* `base64.sh` implements the Base64, Base64 URL, Base32, Base32 Hex and Base16 encoding algorithms.
 
-base64.sh implements the Base64, Base64 URL, Base32, Base32 Hex and
-Base16 encoding algorithms.
+## Compatibility
 
-Compatibility
--------------
+libencode.sh targets shells supporting the KSH “local” extension.
+It is therefore known to run with the following shells:
 
-libencode.sh targets shells supporting the KSH “local” extension. It is
-therefore known to run with the following shells:
+* Debian Almquist SHell - dash ;
+* GNU Bourne-Again SHell - bash ;
+* MirBSD Korn SHell - mksh ;
+* OpenBSD Korn SHell - oksh.
 
-- Debian Almquist SHell - dash ;
-- GNU Bourne-Again SHell - bash ;
-- MirBSD Korn SHell - mksh ;
-- OpenBSD Korn SHell - oksh.
-
-Requirements
-------------
+## Requirements
 
 The following utilities are needed by libencode:
 
-- awk ;
-- bc ;
-- echo ;
-- grep ;
-- jot or seq ;
-- sed.
+* awk ;
+* bc ;
+* echo ;
+* grep ;
+* jot or seq ;
+* sed.
 
-Demo
-----
+## Demo
 
-A simple script wrapping all of the baseXX.sh files is provided: demo.sh.
-It is a Korn Shell script using the autoload feature, so a directory
-populated with a file for every functions exported by libencode and a
-correct FPATH environnement variable are mandatory :
+A simple script wrapping all of the binary-to-text functions is provided: demo.sh.
+It is a Korn Shell script using the autoload feature, so a directory populated with a file for every functions exported by libencode and a correct FPATH environnement variable are mandatory :
 
     $ mkdir -p ~/sh
     $ cd ~/sh
@@ -63,9 +52,10 @@ The environnement is now ready, demo.sh is usable :
     $ echo -n foobar | base64
     Zm9vYmFy
 
-It is also possible to use autoload in an interactive korn shell to use
-base64_encode directly :
+It is also possible to use autoload in an interactive korn shell to use base64_encode directly :
 
     $ autoload base64_encode
     $ base64_encode foobar
     Zm9vYmFy
+
+Of course all of these awkward steps can be bypassed if you just this project as intended: as a library.
