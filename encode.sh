@@ -85,7 +85,7 @@ ord() {
 chr() {
 	local _value="$1"
 
-	awk -v v="$_value" 'BEGIN { printf "%c", v; exit }'
+	printf "\x$(printf %x $_value)\n"
 }
 
 #
