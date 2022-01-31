@@ -40,6 +40,10 @@ It is therefore known to run with the following shells:
 * MirBSD Korn SHell - mksh ;
 * OpenBSD Korn SHell - oksh.
 
+Additionally `encode.sh` is supported by the following shells:
+
+* Z SHell - zsh.
+
 ## Requirements
 
 The following utilities are needed by libencode:
