@@ -38,7 +38,8 @@ It is therefore known to run with the following shells:
 * Debian Almquist SHell - dash ;
 * GNU Bourne-Again SHell - bash ;
 * MirBSD Korn SHell - mksh ;
-* OpenBSD Korn SHell - oksh.
+* OpenBSD Korn SHell - oksh ;
+* Yet Another SHell - yash.
 
 Additionally `encode.sh` is supported by the following shells:
 

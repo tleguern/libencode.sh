@@ -2,6 +2,7 @@ image: openbsd/latest
 packages:
   - bash
   - dash--
+  - yash
   - zsh
 sources:
   - https://git.sr.ht/~tleguern/kbf
@@ -24,6 +25,12 @@ tasks:
       ksh base64-nodejs.t
       ksh pathexpan.t
       ksh rfc4648.t
+  - test-yash: |
+      cd libencode.sh/regress/
+      yash encode.t
+      yash base64-nodejs.t
+      yash pathexpan.t
+      yash rfc4648.t
   - test-zsh: |
       cd libencode.sh/regress/
       zsh encode.t
