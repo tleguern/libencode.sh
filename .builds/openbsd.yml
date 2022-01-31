@@ -1,0 +1,33 @@
+image: openbsd/latest
+packages:
+  - bash
+  - dash--
+  - zsh
+sources:
+  - https://git.sr.ht/~tleguern/kbf
+tasks:
+  - test-bash: |
+      cd libencode.sh/regress/
+      bash encode.t
+      bash base64-nodejs.t
+      bash pathexpan.t
+      bash rfc4648.t
+  - test-dash: |
+      cd libencode.sh/regress/
+      dash encode.t
+      dash base64-nodejs.t
+      dash pathexpan.t
+      dash rfc4648.t
+  - test-oksh: |
+      cd libencode.sh/regress/
+      ksh encode.t
+      ksh base64-nodejs.t
+      ksh pathexpan.t
+      ksh rfc4648.t
+  - test-zsh: |
+      cd libencode.sh/regress/
+      zsh encode.t
+triggers:
+  - action: email
+    condition: failure
+    to: "<tleguern+kbf@bouledef.eu>"
