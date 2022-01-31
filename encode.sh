@@ -130,11 +130,11 @@ dectohex() {
 swap32() {
 	local _value="$1"
 
-	_value="$(echo $_value | sed -E "s/[01]{8}/& /g")"
-	local _oldifs="$IFS"
-	IFS=" "
-	set $_value
-	echo $4$3$2$1
-	IFS="$_oldifs"
+	_a="$(printf "%s" "$_value" | cut -b 1-8 -)"
+	_b="$(printf "%s" "$_value" | cut -b 9-16 -)"
+	_c="$(printf "%s" "$_value" | cut -b 17-24 -)"
+	_d="$(printf "%s" "$_value" | cut -b 25-32 -)"
+	echo "$_d$_c$_b$_a"
+	unset _a _b _c _d
 }
 

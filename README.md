@@ -46,6 +46,7 @@ The following utilities are needed by libencode:
 
 * printf (built-in shell version is fine) ;
 * bc ;
+* cut ;
 * grep ;
 * jot or seq ;
 * sed.
