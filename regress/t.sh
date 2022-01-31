@@ -2,6 +2,10 @@
 
 testcount=0
 
+if [ -n "${ZSH_VERSION:-}" ]; then
+	setopt sh_word_split
+fi
+
 t() {
 	descr="$1"	# short description for the test
 	func="$2"	# shell function to call
