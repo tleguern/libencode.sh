@@ -18,6 +18,6 @@ t "ord %" ord 0 "37" "%"
 t "chr 97" chr 0 "a" "97"
 t "convert a decimal to binary" dectobin 0 "00101010" "42"
 t "conert a binary to decimal" bintodec 0 "42" "00101010"
-t "convert a decimal to hexadecimal" dectohex 0 "66" "42"
+t "convert a decimal to hexadecimal" dectohex 0 "0" "0"
+t "convert a decimal to hexadecimal" dectohex 0 "2a" "42"
 t "swap a 32 bits number" swap32 0 "00000100000000110000001000000001" "00000001000000100000001100000100"
-

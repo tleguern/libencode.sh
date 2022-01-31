@@ -121,8 +121,7 @@ bintodec() {
 dectohex() {
 	local _value="$1"
 
-	local _bc="obase=10; ibase=16; print $_value;"
-	echo "$_bc" | bc
+	printf %x "$_value"
 }
 
 #
