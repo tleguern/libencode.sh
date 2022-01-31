@@ -44,6 +44,7 @@ It is therefore known to run with the following shells:
 
 The following utilities are needed by libencode:
 
+* printf (built-in shell version is fine) ;
 * bc ;
 * grep ;
 * jot or seq ;
