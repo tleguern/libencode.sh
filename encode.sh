@@ -85,7 +85,7 @@ ord() {
 chr() {
 	local _value="$1"
 
-	printf "\x$(printf %x $_value)\n"
+	printf "\\$(printf %o $_value)\n"
 }
 
 #
