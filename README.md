@@ -41,9 +41,8 @@ It is therefore known to run with the following shells:
 * OpenBSD Korn SHell - oksh ;
 * Yet Another SHell - yash.
 
-Additionally `encode.sh` is supported by the following shells:
-
-* Z SHell - zsh.
+Additionally zsh is fully compatible with `encode.sh` but doesn't work well with `base64.sh`.
+In both case the option `SH_WORD_SPLIT` must be activated.
 
 ## Requirements
 

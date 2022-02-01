@@ -14,6 +14,13 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #
 
+#
+# zsh can't execute this function properly because of its peculiar field
+# splitting behaviour. Bash, dash, OpenBSD ksh, MirBSD ksh and yash all
+# ignores IFS characters at the begining or end of a word. Zsh doesn't when
+# IFS characters are not strictly space, tab or newline.
+# It might result in an extra nul byte at the end of $_bytes.
+#
 encode_add_block() {
 	local _byte=""
 
@@ -21,6 +28,12 @@ encode_add_block() {
 	OLDIFS="$IFS"
 	IFS="$encode_us"
 	for _byte in $_bytes; do
+		# Zsh treats IFS white spaces at the end of a word differently
+		# than the other shells: it creates a final null value.
+		# Ignore it.
+		#if [ "$_byte" -eq 0 ]; then
+		#	continue
+		#fi
 		# ord() doesn't need a clean IFS but dectobin() does,
 		# because of its use of enum().
 		_byte="$(ord $_byte)"
@@ -70,7 +83,7 @@ encode_init() {
 	encode_block=""
 	encode_blocks=""
 	encode_dirty_block=""
-	encode_us=$(printf "\037")
+	encode_us="$(printf "\037")"
 	encode_padded=0
 	# Unset globing if the option is not already activated
 	if ! echo $- | grep f > /dev/null 2>&1; then
