@@ -23,3 +23,4 @@ t "base32hex *" base32hex_encode 0 "58======" '*'
 t "base16 ?" base16_encode 0 "3F" '?'
 t "base16 *" base16_encode 0 "2A" '*'
 
+test_done

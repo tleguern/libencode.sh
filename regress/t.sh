@@ -1,6 +1,7 @@
 # Public domain - Tristan Le Guern <tleguern@bouledef.eu>
 
 testcount=0
+errcount=0
 
 if [ -n "${ZSH_VERSION:-}" ]; then
 	setopt sh_word_split
@@ -27,11 +28,16 @@ t() {
 	set +f
 	if [ $ret -ne $ex ]; then
 		diag="not ok"
+		errcount=$(( errcount + 1 ))
 	fi
 	if [ "$(cat $tmp)" != "$res" ]; then
 		diag="not ok"
+		errcount=$(( errcount + 1 ))
 	fi
 	rm -f "$tmp"
 	printf "%s %d%s\n" "${diag:-"ok"}" $testcount "$descr"
 }
 
+test_done() {
+	exit "$errcount"
+}

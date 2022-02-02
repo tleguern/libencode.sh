@@ -21,3 +21,5 @@ t "conert a binary to decimal" bintodec 0 "42" "00101010"
 t "convert a decimal to hexadecimal" dectohex 0 "0" "0"
 t "convert a decimal to hexadecimal" dectohex 0 "2a" "42"
 t "swap a 32 bits number" swap32 0 "00000100000000110000001000000001" "00000001000000100000001100000100"
+
+test_done

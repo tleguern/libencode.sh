@@ -44,3 +44,4 @@ t "base16 5" base16_encode 0 "666F6F62" "foob"
 t "base16 6" base16_encode 0 "666F6F6261" "fooba"
 t "base16 7" base16_encode 0 "666F6F626172" "foobar"
 
+test_done

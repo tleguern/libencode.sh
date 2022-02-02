@@ -20,3 +20,4 @@ t "test 9" base64_encode 0 "WVpbXF1eX2BhYmM=" "YZ[\\]^_\`abc"
 t "test 10" base64_encode 0 "ZGVmZ2hpamtsbW5vcA==" "defghijklmnop"
 t "test 11" base64_encode 0 "cXJzdHV2d3h5ent8fX4=" "qrstuvwxyz{|}~"
 
+test_done

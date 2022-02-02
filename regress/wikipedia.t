@@ -34,3 +34,4 @@ t "base64 1" base64_encode 0 "YW55IGNhcm5hbCBwbGVhc3VyZS4=" "any carnal pleasure
 #t "base16 4" base16_encode 0 "616E79206361726E616C20706C65617375" "any carnal pleasu"
 #t "base16 5" base16_encode 0 "616E79206361726E616C20706C656173" "any carnal pleas"
 
+test_done
