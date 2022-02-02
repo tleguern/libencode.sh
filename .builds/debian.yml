@@ -5,6 +5,7 @@ packages:
   - dash
   - mksh
   - zsh
+  - bc
 tasks:
   - test-bash: |
       cd libencode.sh/regress/
