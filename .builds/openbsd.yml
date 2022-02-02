@@ -1,11 +1,10 @@
+---
 image: openbsd/latest
 packages:
   - bash
   - dash--
   - yash
   - zsh
-sources:
-  - https://git.sr.ht/~tleguern/kbf
 tasks:
   - test-bash: |
       cd libencode.sh/regress/
@@ -37,4 +36,4 @@ tasks:
 triggers:
   - action: email
     condition: failure
-    to: "<tleguern+kbf@bouledef.eu>"
+    to: "<tleguern+libencode@bouledef.eu>"

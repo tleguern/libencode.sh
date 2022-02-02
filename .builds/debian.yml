@@ -1,11 +1,10 @@
+---
 image: debian/stable
 packages:
   - bash
   - dash
   - mksh
   - zsh
-sources:
-  - https://git.sr.ht/~tleguern/libencode.sh
 tasks:
   - test-bash: |
       cd libencode.sh/regress/
